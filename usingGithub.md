@@ -3,7 +3,7 @@
 ### Overview
 Github is a smart online repository. Think of it like Dropbox, OneDrive or Google Drive except it's made for code. Multiple people can update multiple files at the same time and github is able to merge these changes intelligently without destroying code as long as two people don't mess with the same function. It makes division of labor go by a lot easier. 
 
-You can also pull changes at any time and merge them with what you're working on without destroying your code. This is good for making sure you are always using the most up-to-date version of the code. Github also keeps track of the history of **EVERY** commit meaning that if someone makes a big mistake and destroys everything, we are always able to revert.
+You can also pull changes at any time and merge them with what you're working on without destroying your code. This is good for making sure you are always using the most up-to-date version of the code. Github also keeps track of the history of **EVERY** commit meaning that if someone makes a big mistake and destroys everything, we are always able to revert. Github also keeps track of the folders and uploads entire folders instead of using zip files.
 
 Most people use Github with a command line. In the following I will do my best to provide **simple** steps to help you set up your computer to use Github.
 
@@ -79,12 +79,41 @@ Go into the single-cycle-simulator folder. You should see a file named usingGith
 
 Committing means you want to make a timestamp where you are and save changes. This means you can revert to this time period if you ever need to.
 <br><br>
+![CMD of commit](/media/commit.JPG)
+<br><br>
 **IMPORTANT - Since we are working on a team, we should use descriptive commit messages**<br>
 
-- Within quotes you can enter your own commit message that everyone will see when they view your changes.
+- Within quotes you can enter your own commit message that everyone can see when they view your changes.
 - Make sure that messages describe what you did.
 - It is recommended to make **frequent commits** for example, after every function or comment addition.
 - This is recommended so that it can be easy to remove only parts of code if we decide something isn't needed.
-- Example of commit messages are ```-m "added addition function"``` ```-m "commented code in memory class"``` ```-m "added push function"``` ```-m "Created class for registers"``` ```-m "implemented load/store functions"```
+- Example of commit messages are ```-m "continuing jump function"``` ```-m "commented code in memory class"``` ```-m "added push function"``` ```-m "Created class for registers"``` ```-m "implemented load/store functions"```
 <br><br>
 **6.4** Push changes to repository (server)
+
+Once you've committed to your changes, you can use ```git push origin master``` which will push all of your files. You must be connected to the internet for this to work.
+
+![Example of push command on git](/media/push.JPG)
+
+**6.5** You can now view your changes on the github website!
+
+
+----------
+
+### 7. Pulling the repository (Getting most recent updates)
+
+Anytime you sit back down to continue work, make sure to pull all the recent changes. 
+
+1. Navigate to the repository folder.
+2. Use ```git pull``` to pull the most recent changes from the server.
+3. Your folder is now updated.
+4. You might get ```your folder is already updated``` or some other action going on. Both are normal.
+
+![Example of pull command](/media/pull.JPG)
+
+----------
+
+
+### 8. If you wish to update your changes to github, just do step 6 again.
+
+You'll get used to it eventually. It now takes me < 10 seconds to upload everything. The best thing is, if you switch machines or want someone else to view your code, just push your changes and clone on another machine. Neat neat neat!
