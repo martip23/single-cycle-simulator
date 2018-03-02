@@ -3,7 +3,7 @@
 ### Overview
 Github is a smart online repository. Think of it like Dropbox, OneDrive or Google Drive except it's made for code. Multiple people can update multiple files at the same time and github is able to merge these changes intelligently without destroying code as long as two people don't mess with the same function. It makes division of labor go by a lot easier. 
 
-You can also pull changes at any time and merge them with what you're working on without destroying your code. This is good for making sure you are always using the most up-to-date version of the code. 
+You can also pull changes at any time and merge them with what you're working on without destroying your code. This is good for making sure you are always using the most up-to-date version of the code. Github also keeps track of the history of **EVERY** commit meaning that if someone makes a big mistake and destroys everything, we are always able to revert.
 
 Most people use Github with a command line. In the following I will do my best to provide **simple** steps to help you set up your computer to use Github.
 
@@ -15,12 +15,13 @@ Make an account on [www.github.com](www.github.com). I recommend using your pers
 ----------
 
 ### 2. Install Git SCM
-**2.1** [Download and run git Bash here](https://git-scm.com/downloads)
+**2.1** [Download and run git Bash here](https://git-scm.com/downloads)<br><br>
+
 **2.2** Git SCM includes a bash(unix-ish) terminal for a windows computer. Leave all the defaults selected like so
 <br>![default options for Git Bash](/media/git.jpg)<br><br>
 **2.3** Choose whatever text editor you are most familiar with. (Vim is worth learning though!)
 <br>![Options for editor](/media/bashEditor.png)<br><br>
-**2.4** Choose default options for the rest and finish installing.<br> **Do not worry about launching bash yet, we will open it from our desired folder to avoid navigating folders through the command line.
+**2.4** Choose default options for the rest and finish installing.<br><br> **Do not worry about launching bash yet, we will open bash from our desired folder to avoid navigating folders through the command line.**
 
 ----------
 
@@ -39,7 +40,7 @@ To "clone" a repository means to copy it into your computer. We are going to do 
 <br>![Repository link](/media/copyRepo.png)<br>
 
 **4.3** Type ```git clone <repository link>``` (You can paste into git Bash by using ```Shift+Enter```)
-<br>![Git clone example](/media/gitClone.jpg)<br>
+<br>![Git clone example](/media/gitClone.JPG)<br>
 
 **4.4** Take a look inside the gitHub folder. You should now have a folder named after your repository. It will be single-cycle-simulator in this case. 
 <br>![cloned folder](/media/clonedFolder.png)<br>
@@ -49,18 +50,41 @@ To "clone" a repository means to copy it into your computer. We are going to do 
 ----------
 
 ### 5. Make changes!
-Go into the single-cycle-simulator folder. You should see a file named usingGithub.md. THAT IS THIS FILE! Woah! Go ahead and go into it and edit the part after the comment that says ```<EDIT AFTER THIS LINE>``` and add your name.
-![Edit after screenshot](/media/editAfter.jpg)
+Go into the single-cycle-simulator folder. You should see a file named usingGithub.md. THAT IS THIS FILE! Woah! Go ahead and go into it and edit the part after the comment that says ```<!---EDIT AFTER THIS LINE-->``` and add your name.
+![Edit after screenshot](/media/editAfter.JPG)
 
-[//]: <> (EDIT AFTER THIS LINE)
+<!--- EDIT AFTER THIS LINE -->
 **Team member 1:** Patrick Martinez
 
 **Team member 2:** 
 
 **Team member 3:**
 
-[//]: <> (DO NOT EDIT AFTER THIS LINE)
+<!--- EDIT AFTER THIS LINE -->
 
 ----------
 
 ### 6. Stage, Commit and Push those changes to the server.
+**6.1** Navigate into the folder that you cloned. (You can use ```ls``` to see all files and folders and ```cd``` to change directory.) (Also, remember you can use ```[tab]``` to auto complete file/folder names)<br>
+![Example navigate to repo using ls & cd](/media/navigateToRepo.JPG)<br><br>
+
+**OR** alternatively, you can navigate into the folder in windows explorer and right click to open a Bash window.<br><br>
+
+**6.1** Use ```git add .``` to stage (get ready) the files to which you have made changes. ```add``` is the command to prepare the changes while the ```.``` is a recursive search which will add all changes in all files.<br><br>
+
+**6.2** Use ```git status``` to see which files are ready to commit.<br>
+![Example of git add . and git status](/media/gitAddStatus.JPG)<br><br>
+
+**6.3** Use ```git commit -m "INSERT DESCRIPTIVE MESSAGE HERE"``` to commit changes. 
+
+Committing means you want to make a timestamp where you are and save changes. This means you can revert to this time period if you ever need to.
+<br><br>
+**IMPORTANT - Since we are working on a team, we should use descriptive commit messages**<br>
+
+- Within quotes you can enter your own commit message that everyone will see when they view your changes.
+- Make sure that messages describe what you did.
+- It is recommended to make **frequent commits** for example, after every function or comment addition.
+- This is recommended so that it can be easy to remove only parts of code if we decide something isn't needed.
+- Example of commit messages are ```-m "added addition function"``` ```-m "commented code in memory class"``` ```-m "added push function"``` ```-m "Created class for registers"``` ```-m "implemented load/store functions"```
+<br><br>
+**6.4** Push changes to repository (server)
