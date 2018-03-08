@@ -61,6 +61,7 @@ Go into the single-cycle-simulator folder. You should see a file named usingGith
 **Team member 3:**
 
 <!--- EDIT AFTER THIS LINE -->
+Mary Gutierrez
 
 ----------
 
