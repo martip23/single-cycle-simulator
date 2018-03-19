@@ -56,7 +56,7 @@ Go into the single-cycle-simulator folder. You should see a file named usingGith
 <!--- EDIT AFTER THIS LINE -->
 **Team member 1:** Patrick Martinez
 
-**Team member 2:** 
+**Team member 2:** Mary Gutierrez
 
 **Team member 3:**
 
