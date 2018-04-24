@@ -4,6 +4,7 @@
 package sincySimulator;
 
 import sincySimulator.viewComponents.ControlPanel;
+import sincySimulator.viewComponents.RegistersTable;
 
 /**
  * @author martip23
@@ -17,7 +18,8 @@ import sincySimulator.viewComponents.ControlPanel;
  */
 public class Controller {
 	
-	ControlPanel cp = new ControlPanel();// Reference to ControlPanel window
+	ControlPanel cp = new ControlPanel(this);// Reference to ControlPanel window
+	RegistersTable rt = new RegistersTable();//Reference to RegistersTable
 	
 	int delay = 0;		// This sets the delay of execution between code steps.
 	int PC; 			// This creates a program counter for use by the control unit
@@ -88,5 +90,27 @@ public class Controller {
 	 */
 	void notifyChanged(String msg) {
 		
+	}
+	
+	/**
+	 * Operations on Button Presses
+	 * @param option - Button that was clicked
+	 */
+	public void operation(String option) {
+		if (option.equals("Start Execution")) {
+			System.out.println("Starting Exectuion");			
+		} else if (option.equals("Resume")) {
+			System.out.println("Resuming Exectuion");	
+		} else if (option.equals("Pause")) {
+			System.out.println("Pausing Exectuion");	
+		} else if (option.equals("Step")) {
+			System.out.println("Stepping through Exectuion");	
+		} else if (option.equals("View Registers")) {
+			rt.setVisible(true);
+		} else if (option.equals("View Data Memory")) {
+			System.out.println("Viewing Data Memory");	
+		} else if (option.equals("View Instruction Memory")) {
+			System.out.println("Viewing Instruction Memory");	
+		} 
 	}
 }
