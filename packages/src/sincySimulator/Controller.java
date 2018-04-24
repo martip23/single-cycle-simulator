@@ -34,6 +34,7 @@ public class Controller {
 	Registers registers; 	// Initializing the register units
 	ALU alu; 				// Initializing the ALU
 	
+	
 	Controller() {
 		PC = 0;
 		System.out.println("Controller created");
