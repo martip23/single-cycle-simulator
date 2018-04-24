@@ -3,11 +3,11 @@ A single cycle simulator w/ GUI built in java to demonstrate how a single cycle 
 
 # Team Members & Roles #
 
-| Name    | Title                             |
-|---------|-----------------------------------|
-| Patrick | GUI Developer and Chief Architect |
-| Troy    | Lead Developer                    |
-| Mary    | Team Manager and Developer        |
+| Name   	  | Title                             |
+|-------------|-----------------------------------|
+| **Patrick** | GUI Developer and Chief Architect |
+| **Troy**    | Lead Developer                    |
+| **Mary**    | Team Manager and Developer        |
 
 
 ## **Problem:** ##
@@ -44,4 +44,25 @@ We expect to deliver a single cycle processor simulator that can accept a few as
 
 ## Deliverables ##
 We will prepare a read me, access to the program code, an accompanying PowerPoint presentation and documentation to support this program. A live demo will be presented in class at which time questions may be answered.
+
+## Instruction Set Architecture ##
+### Instructions Supported ###
+
+| Instruction Name 	| Opcode 	| Function  	| Type 	|
+|------------------	|--------	|-----------	|------	|
+| ADD              	| 000000 	| 100000    	| R    	|
+| ADDI             	| 001000 	| N/A       	| I    	|
+| SUB              	| 000000 	| 100010    	| R    	|
+| LW               	| 010011 	| N/A       	| I    	|
+| SW               	| 101011 	| N/A       	| I    	|
+| J                	| 000010 	| N/A       	| I    	|
+| BEQ              	| 000100 	| N/A       	| I    	|
+| AND              	| 000000 	| 100100    	| R    	|
+| OR               	| 000000 	| 100101    	| R    	|
+| MUL              	| 011100 	| 000010    	| R    	|
+| SLL              	| 000000 	| 000000    	| R    	|
+| SRL              	| 000000 	| 000010    	| R    	|
+| NOP              	| 000000 	| 000000    	| R    	|
+
+
 
