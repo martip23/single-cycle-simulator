@@ -6,6 +6,7 @@ package sincySimulator;
 import sincySimulator.viewComponents.ControlPanel;
 import sincySimulator.viewComponents.DataMemory;
 import sincySimulator.viewComponents.InstructionMemory;
+import sincySimulator.viewComponents.InstructionWindow;
 import sincySimulator.viewComponents.RegistersTable;
 
 /**
@@ -20,6 +21,7 @@ import sincySimulator.viewComponents.RegistersTable;
  */
 public class Controller {
 	
+	InstructionWindow iw = new InstructionWindow(this);
 	ControlPanel cp = new ControlPanel(this);	// Reference to ControlPanel window
 	RegistersTable rt = new RegistersTable();	//Reference to RegistersTable
 	DataMemory dm = new DataMemory();			// Reference to Data Memory
@@ -45,7 +47,9 @@ public class Controller {
 	 * @param filename the name of the file
 	 */
 	void loadCode(String filename) {
-		// Program Stub
+		if (filename == null) {
+			iw.setVisible(true);
+		}
 	}
 	
 	/**
