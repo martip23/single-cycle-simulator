@@ -3,6 +3,8 @@
  */
 package sincySimulator;
 
+import sincySimulator.viewComponents.ControlPanel;
+
 /**
  * @author martip23
  * This class is the controller (control unit) of the single cycle processor. 
@@ -14,6 +16,8 @@ package sincySimulator;
  * directly.
  */
 public class Controller {
+	
+	ControlPanel cp = new ControlPanel();// Reference to ControlPanel window
 	
 	int delay = 0;		// This sets the delay of execution between code steps.
 	int PC; 			// This creates a program counter for use by the control unit
