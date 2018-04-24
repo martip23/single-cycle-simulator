@@ -4,6 +4,8 @@
 package sincySimulator;
 
 import sincySimulator.viewComponents.ControlPanel;
+import sincySimulator.viewComponents.DataMemory;
+import sincySimulator.viewComponents.InstructionMemory;
 import sincySimulator.viewComponents.RegistersTable;
 
 /**
@@ -18,14 +20,17 @@ import sincySimulator.viewComponents.RegistersTable;
  */
 public class Controller {
 	
-	ControlPanel cp = new ControlPanel(this);// Reference to ControlPanel window
-	RegistersTable rt = new RegistersTable();//Reference to RegistersTable
+	ControlPanel cp = new ControlPanel(this);	// Reference to ControlPanel window
+	RegistersTable rt = new RegistersTable();	//Reference to RegistersTable
+	DataMemory dm = new DataMemory();			// Reference to Data Memory
+	InstructionMemory im = new InstructionMemory();// Reference to Instruction Memory
 	
 	int delay = 0;		// This sets the delay of execution between code steps.
 	int PC; 			// This creates a program counter for use by the control unit
 	String currentIns; 	// Holds instruction being worked on NOW
 	
-	Memory memory; 			// Initializing the memory unit
+	MainMemory memory; 		// Initializing the memory unit
+	DataMemory dataMem;		// Initializing the data memory unit
 	Registers registers; 	// Initializing the register units
 	ALU alu; 				// Initializing the ALU
 	
@@ -108,9 +113,9 @@ public class Controller {
 		} else if (option.equals("View Registers")) {
 			rt.setVisible(true);
 		} else if (option.equals("View Data Memory")) {
-			System.out.println("Viewing Data Memory");	
+			dm.setVisible(true);	
 		} else if (option.equals("View Instruction Memory")) {
-			System.out.println("Viewing Instruction Memory");	
+			im.setVisible(true);	
 		} 
 	}
 }

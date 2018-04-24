@@ -26,7 +26,7 @@ public class RegistersTable extends JFrame {
 		
 		setTitle("Registers");
 		setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
-		setBounds(100, 100, 486, 607);
+		setBounds(100, 100, 316, 607);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new BorderLayout(0, 0));

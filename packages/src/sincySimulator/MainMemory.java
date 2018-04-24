@@ -1,5 +1,5 @@
 package sincySimulator;
 
-public class Memory {
+public class MainMemory {
 
 }
