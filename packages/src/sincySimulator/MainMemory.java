@@ -1,9 +1,6 @@
 package sincySimulator;
 
-import java.util.ArrayList;
-
-/** enter above function or class 
- * 
+/** 
  * Creates an array of 100 strings which simulates 
  * the memory address 0-100, it takes in an address and it returns
  * the value stored at that particular address 
@@ -16,7 +13,7 @@ public class MainMemory {
 
 	/** enter above function or class 
 	 * Stores an instruction string into memory trough an Array
-	 *  @param i - index of the Array
+	 *  @param data - Data to store
 	 *  @param address - represents address of i 
 	 *  	 
 	 */
@@ -29,12 +26,13 @@ public class MainMemory {
 	
 	/** enter above function or class 
 	 * Loads the instruction from memory Location
-	 * @param string - stores value located at index i 
+	 * @param data - Memory location to load
+	 * @return Returns the address at this location.
 	 */
-	public int load(int data)
+	public int load(int index)
 	{
 		
-		return mem[data];
+		return mem[index];
 		
 
 	}
