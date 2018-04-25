@@ -5,7 +5,6 @@ package sincySimulator;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -59,9 +58,9 @@ public class Controller {
 	void loadCode(String filename) {
 		ArrayList<String> inputData = new ArrayList<String>();
 		
-		if (filename == null) {
+//		if (filename == null) {
 			iw.setVisible(true);
-		} else {
+	//	} else {
 			cp.setVisible(true);
 			File file = new File(filename);
 			
@@ -73,7 +72,7 @@ public class Controller {
 				}
 				sc.close();
 				for (int i = 0; i < inputData.size(); i++) {
-					insMemory.store(i, inputData.get(i));
+//					insMemory.store(i, inputData.get(i));
 				}
 			}
 			catch (FileNotFoundException e) {
@@ -82,7 +81,7 @@ public class Controller {
 		}
 
 
-	}
+//	}
 	
 	/**
 	 * Starts the processor.

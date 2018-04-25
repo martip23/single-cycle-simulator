@@ -1,8 +1,5 @@
 package sincySimulator.viewComponents;
 
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -17,6 +14,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 
+@SuppressWarnings("serial")
 public class ControlPanel extends JFrame implements ActionListener {
 
 	private JPanel contentPane;
