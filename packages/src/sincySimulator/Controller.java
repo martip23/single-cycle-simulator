@@ -11,7 +11,7 @@ import java.util.Scanner;
 
 import sincySimulator.viewComponents.ControlPanel;
 import sincySimulator.viewComponents.DataMemory;
-import sincySimulator.viewComponents.InstructionMemory;
+import sincySimulator.viewComponents.InstructionMemoryWindow;
 import sincySimulator.viewComponents.InstructionWindow;
 import sincySimulator.viewComponents.RegistersTable;
 
@@ -36,7 +36,7 @@ public class Controller {
 	ControlPanel cp = new ControlPanel(this);	// Reference to ControlPanel window
 	RegistersTable rt = new RegistersTable();	//Reference to RegistersTable
 	DataMemory dm = new DataMemory();			// Reference to Data Memory
-	InstructionMemory im = new InstructionMemory();// Reference to Instruction Memory
+	InstructionMemoryWindow im = new InstructionMemoryWindow();// Reference to Instruction Memory
 	
 	int delay = 0;		// This sets the delay of execution between code steps.
 	int PC; 			// This creates a program counter for use by the control unit

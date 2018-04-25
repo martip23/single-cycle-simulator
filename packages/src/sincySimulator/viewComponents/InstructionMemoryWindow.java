@@ -10,7 +10,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
-public class InstructionMemory extends JFrame {
+public class InstructionMemoryWindow extends JFrame {
 
 	private JPanel contentPane;
 	private JTable table;
@@ -22,7 +22,7 @@ public class InstructionMemory extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public InstructionMemory() {
+	public InstructionMemoryWindow() {
 		setTitle("Instruction Memory");
 		setBounds(100, 100, 283, 642);
 		contentPane = new JPanel();
@@ -141,5 +141,4 @@ public class InstructionMemory extends JFrame {
 		table.getColumnModel().getColumn(0).setPreferredWidth(25);
 		contentPane.add(new JScrollPane(table));
 	}
-
 }
