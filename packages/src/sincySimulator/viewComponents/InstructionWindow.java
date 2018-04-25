@@ -1,8 +1,6 @@
 package sincySimulator.viewComponents;
 
 import java.awt.BorderLayout;
-import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -13,6 +11,7 @@ import javax.swing.JEditorPane;
 import javax.swing.JLabel;
 import javax.swing.JButton;
 
+@SuppressWarnings("serial")
 public class InstructionWindow extends JFrame {
 
 	private JPanel contentPane;
