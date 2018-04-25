@@ -45,6 +45,9 @@ We expect to deliver a single cycle processor simulator that can accept a few as
 ## Deliverables ##
 We will prepare a read me, access to the program code, an accompanying PowerPoint presentation and documentation to support this program. A live demo will be presented in class at which time questions may be answered.
 
+## Client Expectations ##
+The client will provide an assembly .dat file or type instructions on a pop-up window. The program will then begin execution as customer hits start execution. The execution will be delayed by the time delay set. The client may choose to iterate through the program step by step by using the step command.
+
 ## Instruction Set Architecture ##
 ### Instructions Supported ###
 

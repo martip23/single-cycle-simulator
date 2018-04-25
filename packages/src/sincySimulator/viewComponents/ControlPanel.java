@@ -83,7 +83,6 @@ public class ControlPanel extends JFrame implements ActionListener {
 		contentPane.add(textField);
 		textField.setColumns(10);
 		
-		setVisible(true);
 	}
 	
 	public void actionPerformed(ActionEvent e) {

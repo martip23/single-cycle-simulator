@@ -3,6 +3,12 @@
  */
 package sincySimulator;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Scanner;
+
 import sincySimulator.viewComponents.ControlPanel;
 import sincySimulator.viewComponents.DataMemory;
 import sincySimulator.viewComponents.InstructionMemory;
@@ -14,12 +20,17 @@ import sincySimulator.viewComponents.RegistersTable;
  * This class is the controller (control unit) of the single cycle processor. 
  * It is the first thing to boot up. It starts by pulling a text field into 
  * instruction memory. It then initializes the program counter to 0. 
- * It then reads the first instruction and executes it using a 4 step
- * program. The 4 steps are fetch, decode, execute and store. The control unit
+ * It then reads the first instruction and executes it using a 5 step
+ * program. The 5 steps are fetch, decode, execute, memory access and write-back. The control unit
  * passes most of these tasks to other units and only takes care of decoding 
  * directly.
  */
 public class Controller {
+	
+	/**
+	 * Constants for notify changed triggers.
+	 */
+	int INSTRUCTION_MEMORY = 1;
 	
 	InstructionWindow iw = new InstructionWindow(this);
 	ControlPanel cp = new ControlPanel(this);	// Reference to ControlPanel window
@@ -31,15 +42,14 @@ public class Controller {
 	int PC; 			// This creates a program counter for use by the control unit
 	String currentIns; 	// Holds instruction being worked on NOW
 	
-	MainMemory memory; 		// Initializing the memory unit
-	DataMemory dataMem;		// Initializing the data memory unit
+	InstructionMemory insMemory; 		// Initializing the instruction memory unit
+	MainMemory dataMem;		// Initializing the data memory unit
 	Registers registers; 	// Initializing the register units
 	ALU alu; 				// Initializing the ALU
 	
 	
 	Controller() {
 		PC = 0;
-		System.out.println("Controller created");
 	}
 	
 	/**
@@ -47,9 +57,31 @@ public class Controller {
 	 * @param filename the name of the file
 	 */
 	void loadCode(String filename) {
+		ArrayList<String> inputData = new ArrayList<String>();
+		
 		if (filename == null) {
 			iw.setVisible(true);
+		} else {
+			cp.setVisible(true);
+			File file = new File(filename);
+			
+			try {
+				Scanner sc = new Scanner(file);
+				
+				while (sc.hasNextLine()) {
+					inputData.add(sc.next());
+				}
+				sc.close();
+				for (int i = 0; i < inputData.size(); i++) {
+					insMemory.store(i, inputData.get(i));
+				}
+			}
+			catch (FileNotFoundException e) {
+				e.printStackTrace();
+			}
 		}
+
+
 	}
 	
 	/**
