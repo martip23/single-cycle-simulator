@@ -17,4 +17,7 @@ public class Utilities {
 		return "-1";
 	}
 	
+	static public int decimalToBinary(int valueToConvert) {
+		return -1;
+	}
 }

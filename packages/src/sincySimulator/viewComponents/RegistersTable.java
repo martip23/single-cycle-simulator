@@ -1,6 +1,8 @@
 package sincySimulator.viewComponents;
 
 import java.awt.BorderLayout;
+
+import sincySimulator.Utilities;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -75,4 +77,11 @@ public class RegistersTable extends JFrame {
 		
 	}
 
+	public void updateTable(int[] registers) {
+		for (int i = 0; i < 32; i++) {
+			table.setValueAt(registers[i], i, 3);
+			table.setValueAt(Utilities.decimalToBinary(registers[i]), i, 2);
+		}
+		System.out.println("Updated Model");
+	}
 }

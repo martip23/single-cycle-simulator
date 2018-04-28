@@ -46,32 +46,4 @@ public class InstructionMemory {
 	public String load(int i) {
 		return instructions[i];
 	}
-	
-	/**
-	 * @return the instructions
-	 */
-	public String[] getInstructions() {
-		return instructions;
-	}
-
-	/**
-	 * @param instructions the instructions to set
-	 */
-	public void setInstructions(String[] instructions) {
-		this.instructions = instructions;
-	}
-
-	/**
-	 * @return the binaryInstructions
-	 */
-	public String[] getBinaryInstructions() {
-		return binaryInstructions;
-	}
-
-	/**
-	 * @param binaryInstructions the binaryInstructions to set
-	 */
-	public void setBinaryInstructions(String[] binaryInstructions) {
-		this.binaryInstructions = binaryInstructions;
-	}
 }
