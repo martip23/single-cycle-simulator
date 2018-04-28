@@ -9,6 +9,8 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 import javax.swing.JEditorPane;
+
+import sincySimulator.Utilities.registerNames;
 import sincySimulator.viewComponents.ControlPanel;
 import sincySimulator.viewComponents.DataMemory;
 import sincySimulator.viewComponents.InstructionMemoryWindow;
@@ -32,10 +34,11 @@ public class Controller implements Runnable{
 	/**
 	 * Constants for notify changed triggers.
 	 */
-	int INSTRUCTION_MEMORY = 1;
 	boolean runFlag = false;
 	boolean stepFlag = false;
 	String filename;
+	
+	JEditorPane rawInput; 	// Holds raw input data from IW
 	
 	InstructionMemoryWindow imw;
 	InstructionMemory insMemory; // Initializing the instruction memory unit
@@ -51,8 +54,18 @@ public class Controller implements Runnable{
 	
 	float delay = 1f;		// This sets the delay of execution between code steps.
 	int PC; 			// This creates a program counter for use by the control unit
+	
 	String currentIns; 	// Holds instruction being worked on NOW
-	JEditorPane rawInput; 	// Holds raw input data from IW
+	
+	String opCode;
+	String des;
+	String op1;
+	String op2;
+	int shamft;
+	int funct;
+	
+	int result;
+	boolean willWrite = false;
 	
 	ALU alu; 				// Initializing the ALU
 	
@@ -146,6 +159,9 @@ public class Controller implements Runnable{
 	 */
 	void fetch() {
 		System.out.println("FETCH");
+		currentIns = insMemory.load(PC);
+		imw.highlightRow(PC);
+		PC++;
 	}
 	
 	/**
@@ -154,6 +170,21 @@ public class Controller implements Runnable{
 	 */
 	void decode() {
 		System.out.println("DECODE");
+		Scanner sc = new Scanner(currentIns);
+		System.out.println(currentIns);
+		opCode = sc.next();
+		System.out.println(opCode);
+		des = sc.next();
+		if (sc.hasNext()) {
+			op1 = sc.next();
+			op2 = sc.next();
+			System.out.println(op2);
+		}
+		if (sc.hasNext()) {
+			shamft = Integer.parseInt(sc.next());
+			funct = Integer.parseInt(sc.next());
+		}
+		sc.close();
 	}
 	
 	/**
@@ -161,6 +192,18 @@ public class Controller implements Runnable{
 	 */
 	void execute() {
 		System.out.println("EXECUTE");
+		opCode.toUpperCase();
+		
+		if (opCode.equals("ADD")) {
+			int val1 = reg.load(Utilities.registerCodeToInt(op1));
+			int val2 = reg.load(Utilities.registerCodeToInt(op2));
+			result = ALU.add(val1, val2);
+			willWrite = true;
+		} else if (opCode.equals("ADDI")) {
+			int val1 = reg.load(Utilities.registerCodeToInt(op1));
+			result = ALU.add(val1, Integer.parseInt(op2));
+			willWrite = true;
+		}
 	}
 	
 	/**
@@ -168,10 +211,17 @@ public class Controller implements Runnable{
 	 */
 	void memory () {
 		System.out.println("MEMORY");
+		if (opCode == "LW")
+			System.out.println("Load called");
+		if (opCode == "SW")
+			System.out.println("Store called");
 	}
 	
 	void writeBack() {
 		System.out.println("WRITEBACK");
+		if (willWrite) {
+			reg.write(Utilities.registerCodeToInt(des), result);
+		}
 	}
 	
 	/*

@@ -152,4 +152,9 @@ public class InstructionMemoryWindow extends JFrame {
 			}));
 		System.out.println("Updated Model");
 	}
+
+	public void highlightRow(int pC) {
+		table.setRowSelectionInterval(pC, pC);
+		
+	}
 }
