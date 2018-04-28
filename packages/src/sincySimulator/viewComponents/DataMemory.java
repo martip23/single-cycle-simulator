@@ -141,4 +141,16 @@ public class DataMemory extends JFrame {
 		contentPane.add(new JScrollPane(table));
 	}
 
+	public void updateTable(int[] nums) {
+		Object [][] newTable = new Object[100][2];
+		for (int i = 0; i < 100; i++) {
+			newTable[i][0] = i;
+			newTable[i][1] = nums[i];
+		}
+		table.setModel(new DefaultTableModel(newTable, new String[] {
+				"Address", "Value"
+			}));
+		System.out.println("Updated Model");
+	}
+
 }

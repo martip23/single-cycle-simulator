@@ -35,25 +35,30 @@ public class Controller {
 	boolean finishedInput = false;
 	
 	InstructionMemoryWindow imw;
-	InstructionMemory insMemory; 		// Initializing the instruction memory unit
+	InstructionMemory insMemory; // Initializing the instruction memory unit
+	
+	DataMemory dm;
+	MainMemory mainMem; // Initializing the data memory unit
 	
 	InstructionWindow iw;
 	ControlPanel cp = new ControlPanel(this);	// Reference to ControlPanel window
 	RegistersTable rt = new RegistersTable();	//Reference to RegistersTable
-	DataMemory dm = new DataMemory();			// Reference to Data Memory
+				// Reference to Data Memory
 	
 	int delay = 0;		// This sets the delay of execution between code steps.
 	int PC; 			// This creates a program counter for use by the control unit
 	String currentIns; 	// Holds instruction being worked on NOW
 	JEditorPane rawInput; 	// Holds raw input data from IW
 	
-	MainMemory dataMem;		// Initializing the data memory unit
+
 	Registers registers; 	// Initializing the register units
 	ALU alu; 				// Initializing the ALU
 	
 	Controller() {	
 		imw = new InstructionMemoryWindow();
 		insMemory = new InstructionMemory(imw);
+		dm = new DataMemory();
+		mainMem = new MainMemory(dm);
 		iw = new InstructionWindow(this);
 		PC = 0;
 	}
