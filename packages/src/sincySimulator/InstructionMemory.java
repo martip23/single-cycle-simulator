@@ -1,13 +1,25 @@
 package sincySimulator;
 
 /**
- * Holds instruction memory. Holds strings for commands and a binary representation
+ * Holds instruction memory. Holds strings for commands and a binary representation.
+ * Memory is of size 100.
  * @author martip23
  */
 public class InstructionMemory {
 
 	String[] instructions = new String[100];
+
 	String[] binaryInstructions = new String[100];
+	
+	/**
+	 * Initializes all memory locations to 0.
+	 */
+	public InstructionMemory() {
+		for (int i = 0; i < 100; i++) {
+			instructions[i] = "0";
+			binaryInstructions[i] = "0000 0000 0000 0000 0000 0000 0000 0000";
+		}
+	}
 
 	/**
 	 * Stores an instruction string in memory
@@ -25,6 +37,34 @@ public class InstructionMemory {
 	 * @return Binary representation of string.
 	 */
 	public String load(int i) {
-		return binaryInstructions[i];
+		return instructions[i];
+	}
+	
+	/**
+	 * @return the instructions
+	 */
+	public String[] getInstructions() {
+		return instructions;
+	}
+
+	/**
+	 * @param instructions the instructions to set
+	 */
+	public void setInstructions(String[] instructions) {
+		this.instructions = instructions;
+	}
+
+	/**
+	 * @return the binaryInstructions
+	 */
+	public String[] getBinaryInstructions() {
+		return binaryInstructions;
+	}
+
+	/**
+	 * @param binaryInstructions the binaryInstructions to set
+	 */
+	public void setBinaryInstructions(String[] binaryInstructions) {
+		this.binaryInstructions = binaryInstructions;
 	}
 }

@@ -3,10 +3,15 @@
  */
 package sincySimulator;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
+
+import javax.swing.JEditorPane;
+import javax.swing.JTextField;
 
 import sincySimulator.viewComponents.ControlPanel;
 import sincySimulator.viewComponents.DataMemory;
@@ -24,44 +29,55 @@ import sincySimulator.viewComponents.RegistersTable;
  * passes most of these tasks to other units and only takes care of decoding 
  * directly.
  */
-public class Controller {
+public class Controller implements ActionListener {
+	
+	ThreadB b = new ThreadB();
 	
 	/**
 	 * Constants for notify changed triggers.
 	 */
 	int INSTRUCTION_MEMORY = 1;
+	boolean finishedInput = false;
 	
-	InstructionWindow iw = new InstructionWindow(this);
+	InstructionMemoryWindow im;
+	InstructionWindow iw;
 	ControlPanel cp = new ControlPanel(this);	// Reference to ControlPanel window
 	RegistersTable rt = new RegistersTable();	//Reference to RegistersTable
 	DataMemory dm = new DataMemory();			// Reference to Data Memory
-	InstructionMemoryWindow im = new InstructionMemoryWindow();// Reference to Instruction Memory
 	
 	int delay = 0;		// This sets the delay of execution between code steps.
 	int PC; 			// This creates a program counter for use by the control unit
 	String currentIns; 	// Holds instruction being worked on NOW
+	JEditorPane rawInput; 	// Holds raw input data from IW
 	
 	InstructionMemory insMemory; 		// Initializing the instruction memory unit
 	MainMemory dataMem;		// Initializing the data memory unit
 	Registers registers; 	// Initializing the register units
 	ALU alu; 				// Initializing the ALU
 	
-	
 	Controller() {
+		im = new InstructionMemoryWindow();// Reference to Instruction Memory
+		iw = new InstructionWindow(this);
 		PC = 0;
 	}
+	
+	public Controller(JEditorPane editorPane) {
+		rawInput = editorPane;
+		}
 	
 	/**
 	 * Reads a file and loads all instructions into instruction memory.
 	 * @param filename the name of the file
+	 * @return 
 	 */
 	void loadCode(String filename) {
 		ArrayList<String> inputData = new ArrayList<String>();
 		
-//		if (filename == null) {
+		if (filename == null) {
 			iw.setVisible(true);
-	//	} else {
-			cp.setVisible(true);
+			waitUntilDone();
+			iw.setVisible(false);
+		} else {
 			File file = new File(filename);
 			
 			try {
@@ -72,21 +88,20 @@ public class Controller {
 				}
 				sc.close();
 				for (int i = 0; i < inputData.size(); i++) {
-//					insMemory.store(i, inputData.get(i));
+					insMemory.store(i, inputData.get(i));
 				}
 			}
 			catch (FileNotFoundException e) {
 				e.printStackTrace();
 			}
 		}
-
-
-//	}
+	cp.setVisible(true);
+	}
 	
 	/**
 	 * Starts the processor.
 	 */
-	void run() {
+	void runProc() {
 		while(true) {
 			fetch();
 			decode();
@@ -152,6 +167,34 @@ public class Controller {
 			dm.setVisible(true);	
 		} else if (option.equals("View Instruction Memory")) {
 			im.setVisible(true);	
-		} 
+		}
+	}
+	
+	public synchronized void waitUntilDone() {
+		synchronized(this) {
+			while (!finishedInput) {
+				try {
+					this.wait();
+				} catch (InterruptedException ignore) {
+					System.out.println("EXCEPTION!");
+				}
+			}
+		}
+	}
+	
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		synchronized(this) {
+			finishedInput = true;
+			System.out.println("NOTIFIED");
+			this.notifyAll();
+		}
+	}
+
+	@Override
+	public void run() {
+		// TODO Auto-generated method stub
+		
 	}
 }
