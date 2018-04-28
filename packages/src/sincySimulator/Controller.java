@@ -25,14 +25,17 @@ import sincySimulator.viewComponents.RegistersTable;
  * passes most of these tasks to other units and only takes care of decoding 
  * directly.
  */
-public class Controller {
+public class Controller implements Runnable{
 	
-	
+	Thread time;
+
 	/**
 	 * Constants for notify changed triggers.
 	 */
 	int INSTRUCTION_MEMORY = 1;
-	boolean finishedInput = false;
+	boolean runFlag = false;
+	boolean stepFlag = false;
+	String filename;
 	
 	InstructionMemoryWindow imw;
 	InstructionMemory insMemory; // Initializing the instruction memory unit
@@ -46,7 +49,7 @@ public class Controller {
 	InstructionWindow iw;
 	ControlPanel cp = new ControlPanel(this);	// Reference to ControlPanel window
 	
-	int delay = 0;		// This sets the delay of execution between code steps.
+	float delay = 1f;		// This sets the delay of execution between code steps.
 	int PC; 			// This creates a program counter for use by the control unit
 	String currentIns; 	// Holds instruction being worked on NOW
 	JEditorPane rawInput; 	// Holds raw input data from IW
@@ -78,12 +81,11 @@ public class Controller {
 	 * @return 
 	 */
 	void loadCode(String filename) {
+		@SuppressWarnings("unused")
 		ArrayList<String> inputData;
-		
+		this.filename = filename;		
 		if (filename == null) {
 			iw.setVisible(true);
-//			waitUntilDone();
-//			iw.setVisible(false);
 		} else {
 			File file = new File(filename);
 			
@@ -115,21 +117,35 @@ public class Controller {
 	/**
 	 * Starts the processor.
 	 */
-	void runProc() {
+	public void run() {
 		while(true) {
-			fetch();
-			decode();
-			execute();
-			store();
-		}
+			while(!runFlag && !stepFlag) {
+				synchronized(this) {
+					try {
+						System.out.println("Waiting...");
+						this.wait();
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}
+				}
+			}
+		fetch();
+		decode();
+		execute();
+		memory();
+		writeBack();
+		if (stepFlag) {
+			stepFlag = false;
+		} else { delay();}
 	}
+}
 	
 	/**
 	 * Gets the next instruction from instruction memory and 
 	 * loads into currentIns.
 	 */
 	void fetch() {
-		
+		System.out.println("FETCH");
 	}
 	
 	/**
@@ -137,43 +153,55 @@ public class Controller {
 	 * to the correct location.
 	 */
 	void decode() {
-		
+		System.out.println("DECODE");
 	}
 	
 	/**
 	 * Passes the required calculation to the ALU.
 	 */
 	void execute() {
-		
+		System.out.println("EXECUTE");
 	}
 	
 	/**
 	 * Stores the result into a register.
 	 */
-	void store () {
-		
+	void memory () {
+		System.out.println("MEMORY");
 	}
 	
-	/**
-	 * Notify the GUI that the state of one of the models has changed.
-	 * @param msg String declaring the type of change.
+	void writeBack() {
+		System.out.println("WRITEBACK");
+	}
+	
+	/*
+	 * Waits for the decided delay time.
 	 */
-	void notifyChanged(String msg) {
-		
+	void delay() {
+		try {
+			Thread.sleep((long) (1000 * delay));
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	/**
 	 * Operations on Button Presses
 	 * @param option - Button that was clicked
 	 */
-	public void operation(String option) {
+	public synchronized void operation(String option) {
 		if (option.equals("Start Execution")) {
-			System.out.println("Starting Exectuion");			
+			System.out.println("Starting Exectuion");
+			loadCode(filename);
+			runFlag = true;
 		} else if (option.equals("Resume")) {
+			runFlag = true;
 			System.out.println("Resuming Exectuion");	
 		} else if (option.equals("Pause")) {
+			runFlag = false;
 			System.out.println("Pausing Exectuion");	
 		} else if (option.equals("Step")) {
+			stepFlag = true;
 			System.out.println("Stepping through Exectuion");	
 		} else if (option.equals("View Registers")) {
 			rt.setVisible(true);
@@ -184,21 +212,14 @@ public class Controller {
 		} else if (option.equals("Finished")) {
 			pushInputToMemory();
 		}
-	}
-	
-	public synchronized void waitUntilDone() {
 		synchronized(this) {
-			while (!finishedInput) {
-				try {
-					this.wait();
-				} catch (InterruptedException ignore) {
-					System.out.println("EXCEPTION!");
-				}
-			}
+			this.notifyAll();
 		}
 	}
-	
 
+	/**
+	 * Used to push the initial code to instruction memory.
+	 */
 	public void pushInputToMemory() {
 		System.out.println("Loading from IW");
 		Scanner sc = new Scanner(rawInput.getText());
@@ -208,6 +229,11 @@ public class Controller {
 		}
 	}
 
+	/**
+	 * Used to facilitate the transfer of the editor pane text box to the
+	 * controller
+	 * @param editorPane - The text box
+ 	 */
 	public void passText(JEditorPane editorPane) {
 		System.out.println("Passing text");
 		this.rawInput = editorPane;		
