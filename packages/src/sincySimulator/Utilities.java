@@ -14,7 +14,7 @@ public class Utilities {
 	 */
 	static public String instructionToBinary(String instruction) {
 		//@TODO: implementation
-		return "null";
+		return "-1";
 	}
 	
 }

@@ -3,16 +3,12 @@
  */
 package sincySimulator;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 import javax.swing.JEditorPane;
-import javax.swing.JTextField;
-
 import sincySimulator.viewComponents.ControlPanel;
 import sincySimulator.viewComponents.DataMemory;
 import sincySimulator.viewComponents.InstructionMemoryWindow;
@@ -29,9 +25,8 @@ import sincySimulator.viewComponents.RegistersTable;
  * passes most of these tasks to other units and only takes care of decoding 
  * directly.
  */
-public class Controller implements ActionListener {
+public class Controller {
 	
-	ThreadB b = new ThreadB();
 	
 	/**
 	 * Constants for notify changed triggers.
@@ -39,7 +34,9 @@ public class Controller implements ActionListener {
 	int INSTRUCTION_MEMORY = 1;
 	boolean finishedInput = false;
 	
-	InstructionMemoryWindow im;
+	InstructionMemoryWindow imw;
+	InstructionMemory insMemory; 		// Initializing the instruction memory unit
+	
 	InstructionWindow iw;
 	ControlPanel cp = new ControlPanel(this);	// Reference to ControlPanel window
 	RegistersTable rt = new RegistersTable();	//Reference to RegistersTable
@@ -50,20 +47,20 @@ public class Controller implements ActionListener {
 	String currentIns; 	// Holds instruction being worked on NOW
 	JEditorPane rawInput; 	// Holds raw input data from IW
 	
-	InstructionMemory insMemory; 		// Initializing the instruction memory unit
 	MainMemory dataMem;		// Initializing the data memory unit
 	Registers registers; 	// Initializing the register units
 	ALU alu; 				// Initializing the ALU
 	
-	Controller() {
-		im = new InstructionMemoryWindow();// Reference to Instruction Memory
+	Controller() {	
+		imw = new InstructionMemoryWindow();
+		insMemory = new InstructionMemory(imw);
 		iw = new InstructionWindow(this);
 		PC = 0;
 	}
 	
 	public Controller(JEditorPane editorPane) {
-		rawInput = editorPane;
-		}
+		this.rawInput = editorPane;
+	}
 	
 	/**
 	 * Reads a file and loads all instructions into instruction memory.
@@ -71,31 +68,38 @@ public class Controller implements ActionListener {
 	 * @return 
 	 */
 	void loadCode(String filename) {
-		ArrayList<String> inputData = new ArrayList<String>();
+		ArrayList<String> inputData;
 		
 		if (filename == null) {
 			iw.setVisible(true);
-			waitUntilDone();
-			iw.setVisible(false);
+//			waitUntilDone();
+//			iw.setVisible(false);
 		} else {
 			File file = new File(filename);
 			
 			try {
 				Scanner sc = new Scanner(file);
-				
-				while (sc.hasNextLine()) {
-					inputData.add(sc.next());
-				}
-				sc.close();
-				for (int i = 0; i < inputData.size(); i++) {
-					insMemory.store(i, inputData.get(i));
-				}
+				inputData = parseText(sc);
 			}
 			catch (FileNotFoundException e) {
 				e.printStackTrace();
 			}
 		}
-	cp.setVisible(true);
+		cp.setVisible(true);
+	}
+	
+	/**
+	 * Parses pieces of text in a scanner file for use in instructions
+	 * @param sc Scanner file to scan
+	 * @return A list of strings from the file
+	 */
+	ArrayList<String> parseText(Scanner sc) {
+		ArrayList<String> inputData = new ArrayList<String>();
+		while (sc.hasNextLine()) {
+			inputData.add(sc.nextLine());
+		}
+		sc.close();
+		return inputData;
 	}
 	
 	/**
@@ -166,7 +170,9 @@ public class Controller implements ActionListener {
 		} else if (option.equals("View Data Memory")) {
 			dm.setVisible(true);	
 		} else if (option.equals("View Instruction Memory")) {
-			im.setVisible(true);	
+			imw.setVisible(true);	
+		} else if (option.equals("Finished")) {
+			pushInputToMemory();
 		}
 	}
 	
@@ -183,18 +189,17 @@ public class Controller implements ActionListener {
 	}
 	
 
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		synchronized(this) {
-			finishedInput = true;
-			System.out.println("NOTIFIED");
-			this.notifyAll();
+	public void pushInputToMemory() {
+		System.out.println("Loading from IW");
+		Scanner sc = new Scanner(rawInput.getText());
+		ArrayList<String> inputData = parseText(sc);
+		for (int i = 0; i < inputData.size(); i++) {
+			insMemory.store(i, inputData.get(i));
 		}
 	}
 
-	@Override
-	public void run() {
-		// TODO Auto-generated method stub
-		
+	public void passText(JEditorPane editorPane) {
+		System.out.println("Passing text");
+		this.rawInput = editorPane;		
 	}
 }

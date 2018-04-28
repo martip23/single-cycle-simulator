@@ -1,11 +1,15 @@
 package sincySimulator;
 
+import sincySimulator.viewComponents.InstructionMemoryWindow;
+
 /**
  * Holds instruction memory. Holds strings for commands and a binary representation.
  * Memory is of size 100.
  * @author martip23
  */
 public class InstructionMemory {
+	
+	InstructionMemoryWindow imw;
 
 	String[] instructions = new String[100];
 
@@ -14,21 +18,24 @@ public class InstructionMemory {
 	/**
 	 * Initializes all memory locations to 0.
 	 */
-	public InstructionMemory() {
+	public InstructionMemory(InstructionMemoryWindow imw) {
+		this.imw = imw;
 		for (int i = 0; i < 100; i++) {
 			instructions[i] = "0";
 			binaryInstructions[i] = "0000 0000 0000 0000 0000 0000 0000 0000";
 		}
+		this.imw.updateTable(instructions, binaryInstructions);
 	}
 
 	/**
 	 * Stores an instruction string in memory
 	 * @param i - Index to store at
-	 * @param string - Instruction string to store.
+	 * @param data - Instruction string to store.
 	 */
-	public void store(int i, String string) {
-		instructions[i] = string;
-		binaryInstructions[i] = Utilities.instructionToBinary(string);
+	public void store(int k, String data) {
+		instructions[k] = data;
+		binaryInstructions[k] = Utilities.instructionToBinary(data);
+		imw.updateTable(instructions, binaryInstructions);
 	}
 	
 	/**

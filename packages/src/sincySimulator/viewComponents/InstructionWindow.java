@@ -1,6 +1,8 @@
 package sincySimulator.viewComponents;
 
 import java.awt.BorderLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -13,10 +15,11 @@ import javax.swing.JLabel;
 import javax.swing.JButton;
 
 @SuppressWarnings("serial")
-public class InstructionWindow extends JFrame{
+public class InstructionWindow extends JFrame implements ActionListener{
 
 	private JPanel contentPane;
 	private Controller cont;
+	private JEditorPane editorPane;
 
 	/**
 	 * Create the frame.
@@ -32,7 +35,7 @@ public class InstructionWindow extends JFrame{
 		contentPane.setLayout(new BorderLayout(0, 0));
 		setContentPane(contentPane);
 		
-		JEditorPane editorPane = new JEditorPane();
+		editorPane = new JEditorPane();
 		contentPane.add(editorPane, BorderLayout.CENTER);
 		
 		JLabel lblEnterInstructions = new JLabel("Enter Instructions:");
@@ -40,6 +43,12 @@ public class InstructionWindow extends JFrame{
 		
 		JButton btnFinished = new JButton("Finished");
 		contentPane.add(btnFinished, BorderLayout.SOUTH);
-		btnFinished.addActionListener(new Controller(editorPane));
+		btnFinished.addActionListener(this);
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		cont.passText(editorPane);
+		cont.operation(e.getActionCommand());
 	}
 }

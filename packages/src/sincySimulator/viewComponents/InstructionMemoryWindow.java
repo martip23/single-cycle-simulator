@@ -139,4 +139,17 @@ public class InstructionMemoryWindow extends JFrame {
 		table.getColumnModel().getColumn(0).setPreferredWidth(25);
 		contentPane.add(new JScrollPane(table));
 	}
+
+	public void updateTable(String[] inst, String[] binaryInst) {
+		Object [][] newTable = new Object[100][3];
+		for (int i = 0; i < 100; i++) {
+			newTable[i][0] = i;
+			newTable[i][1] = inst[i];
+			newTable[i][2] = binaryInst[i];
+		}
+		table.setModel(new DefaultTableModel(newTable, new String[] {
+				"Address", "Instruction", "Binary Value"
+			}));
+		System.out.println("Updated Model");
+	}
 }

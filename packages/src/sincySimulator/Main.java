@@ -22,7 +22,7 @@ public class Main {
 		System.out.println("Pre-Read... ");
 		processor.loadCode(filename);
 		System.out.println("Running sincySimulator... ");
-		processor.run();
+		processor.runProc();
 		System.out.println("Finished running");
 		
 
