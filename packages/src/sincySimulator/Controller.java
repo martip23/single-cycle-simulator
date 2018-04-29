@@ -203,6 +203,36 @@ public class Controller implements Runnable{
 			int val1 = reg.load(Utilities.registerCodeToInt(op1));
 			result = ALU.add(val1, Integer.parseInt(op2));
 			willWrite = true;
+		} else if (opCode.equals("SUB")) {
+			int val1 = reg.load(Utilities.registerCodeToInt(op1));
+			int val2 = reg.load(Utilities.registerCodeToInt(op2));
+			result = ALU.sub(val1, val2);
+			willWrite = true;
+		} else if (opCode.equals("MUL")) {
+			int val1 = reg.load(Utilities.registerCodeToInt(op1));
+			int val2 = reg.load(Utilities.registerCodeToInt(op2));
+			result = ALU.mul(val1, val2);
+			willWrite = true;
+		} else if (opCode.equals("AND")) {
+			int val1 = reg.load(Utilities.registerCodeToInt(op1));
+			int val2 = reg.load(Utilities.registerCodeToInt(op2));
+			result = ALU.and(val1, val2);
+			willWrite = true;
+		} else if (opCode.equals("OR")) {
+			int val1 = reg.load(Utilities.registerCodeToInt(op1));
+			int val2 = reg.load(Utilities.registerCodeToInt(op2));
+			result = ALU.or(val1, val2);
+			willWrite = true;
+		} else if (opCode.equals("SLL")) {
+			int val1 = reg.load(Utilities.registerCodeToInt(op1));
+			int val2 = reg.load(Utilities.registerCodeToInt(op2));
+			result = ALU.sll(val1, val2);
+			willWrite = true;
+		} else if (opCode.equals("SRL")) {
+			int val1 = reg.load(Utilities.registerCodeToInt(op1));
+			int val2 = reg.load(Utilities.registerCodeToInt(op2));
+			result = ALU.srl(val1, val2);
+			willWrite = true;
 		}
 	}
 	
