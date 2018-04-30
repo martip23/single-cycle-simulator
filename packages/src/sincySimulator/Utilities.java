@@ -144,7 +144,7 @@ public class Utilities {
 				break;
 		}
 		s.close();
-		return op+rs+rt+rd+shamt+funct+imm;
+		return op+" "+rs+" "+rt+" "+rd+" "+shamt+" "+funct+" "+imm;
 	}
 	
 	static public String findRegisterCode(String operation) {
