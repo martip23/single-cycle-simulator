@@ -19,7 +19,7 @@ public class Main {
 		Controller processor = (new Controller());
 		Thread thread = new Thread(processor);
 		
-		System.out.println("Starting sincySimulator (beta)... ");
+		System.out.println("Starting sincySimulator (prototype)... ");
 		System.out.println("Pre-Read... ");
 		processor.loadCode(filename);
 		System.out.println("Running sincySimulator... ");

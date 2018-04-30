@@ -10,7 +10,6 @@ import java.util.Scanner;
 
 import javax.swing.JEditorPane;
 
-import sincySimulator.Utilities.registerNames;
 import sincySimulator.viewComponents.ControlPanel;
 import sincySimulator.viewComponents.DataMemory;
 import sincySimulator.viewComponents.InstructionMemoryWindow;
@@ -42,6 +41,7 @@ public class Controller implements Runnable{
 	
 	InstructionMemoryWindow imw;
 	InstructionMemory insMemory; // Initializing the instruction memory unit
+	int instructionTotal = 0;
 	
 	DataMemory dm;
 	MainMemory mainMem; // Initializing the data memory unit
@@ -64,6 +64,7 @@ public class Controller implements Runnable{
 	int shamft;
 	int funct;
 	
+	int memVal;
 	int result;
 	boolean willWrite = false;
 	
@@ -105,16 +106,20 @@ public class Controller implements Runnable{
 			try {
 				Scanner sc = new Scanner(file);
 				inputData = parseText(sc);
+				for (int i = 0; i < inputData.size(); i++) {
+					insMemory.store(i, inputData.get(i));
+				}
 			}
 			catch (FileNotFoundException e) {
-				e.printStackTrace();
+				iw.setVisible(true);
 			}
 		}
 		cp.setVisible(true);
 	}
 	
 	/**
-	 * Parses pieces of text in a scanner file for use in instructions
+	 * Parses pieces of text in a scanner file for use in instructions. Gets
+	 * each line and adds it to a list named inputData.
 	 * @param sc Scanner file to scan
 	 * @return A list of strings from the file
 	 */
@@ -124,6 +129,7 @@ public class Controller implements Runnable{
 			inputData.add(sc.nextLine());
 		}
 		sc.close();
+		instructionTotal = inputData.size();
 		return inputData;
 	}
 	
@@ -161,7 +167,6 @@ public class Controller implements Runnable{
 		System.out.println("FETCH");
 		currentIns = insMemory.load(PC);
 		imw.highlightRow(PC);
-		PC++;
 	}
 	
 	/**
@@ -169,16 +174,18 @@ public class Controller implements Runnable{
 	 * to the correct location.
 	 */
 	void decode() {
-		System.out.println("DECODE");
+		System.out.print("DECODE: ");
 		Scanner sc = new Scanner(currentIns);
 		System.out.println(currentIns);
 		opCode = sc.next();
-		System.out.println(opCode);
+		opCode = opCode.toUpperCase();
 		des = sc.next();
+		des.replace(",", "");
 		if (sc.hasNext()) {
 			op1 = sc.next();
+			op1.replace(",", "");
 			op2 = sc.next();
-			System.out.println(op2);
+			op2.replace(",", "");
 		}
 		if (sc.hasNext()) {
 			shamft = Integer.parseInt(sc.next());
@@ -192,7 +199,6 @@ public class Controller implements Runnable{
 	 */
 	void execute() {
 		System.out.println("EXECUTE");
-		opCode.toUpperCase();
 		
 		if (opCode.equals("ADD")) {
 			int val1 = reg.load(Utilities.registerCodeToInt(op1));
@@ -225,12 +231,12 @@ public class Controller implements Runnable{
 			willWrite = true;
 		} else if (opCode.equals("SLL")) {
 			int val1 = reg.load(Utilities.registerCodeToInt(op1));
-			int val2 = reg.load(Utilities.registerCodeToInt(op2));
+			int val2 = Integer.parseInt(op2);
 			result = ALU.sll(val1, val2);
 			willWrite = true;
 		} else if (opCode.equals("SRL")) {
 			int val1 = reg.load(Utilities.registerCodeToInt(op1));
-			int val2 = reg.load(Utilities.registerCodeToInt(op2));
+			int val2 = Integer.parseInt(op2);
 			result = ALU.srl(val1, val2);
 			willWrite = true;
 		} else if (opCode.equals("LW")) {
@@ -272,6 +278,13 @@ public class Controller implements Runnable{
 		System.out.println("WRITEBACK");
 		if (willWrite) {
 			reg.write(Utilities.registerCodeToInt(des), result);
+			if (opCode.equals("LW")) {
+				reg.write(Utilities.registerCodeToInt(des), memVal);
+			}
+		}
+		PC++;
+		if (PC == instructionTotal) {
+			runFlag = false;
 		}
 	}
 	
@@ -279,6 +292,7 @@ public class Controller implements Runnable{
 	 * Waits for the decided delay time.
 	 */
 	void delay() {
+		delay = getDelay();
 		try {
 			Thread.sleep((long) (1000 * delay));
 		} catch (InterruptedException e) {
@@ -336,7 +350,14 @@ public class Controller implements Runnable{
 	 * @param editorPane - The text box
  	 */
 	public void passText(JEditorPane editorPane) {
-		System.out.println("Passing text");
 		this.rawInput = editorPane;		
+	}
+	
+	/**
+	 * Gets the delay from control panel view
+	 * @return the delay as a float.
+	 */
+	public float getDelay() {		
+		return cp.getDelay();
 	}
 }

@@ -82,6 +82,5 @@ public class RegistersTable extends JFrame {
 			table.setValueAt(registers[i], i, 3);
 			table.setValueAt(Utilities.decimalToBinary(registers[i]), i, 2);
 		}
-		System.out.println("Updated Model");
 	}
 }

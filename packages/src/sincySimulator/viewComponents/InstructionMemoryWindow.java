@@ -150,7 +150,6 @@ public class InstructionMemoryWindow extends JFrame {
 		table.setModel(new DefaultTableModel(newTable, new String[] {
 				"Address", "Instruction", "Binary Value"
 			}));
-		System.out.println("Updated Model");
 	}
 
 	public void highlightRow(int pC) {
