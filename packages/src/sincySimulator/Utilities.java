@@ -254,8 +254,17 @@ public class Utilities {
 	 * @param valueToConvert
 	 * @return the binary value in int format
 	 */
-	static public int decimalToBinary(int valueToConvert) {
-		return -1;
+	static public String decimalToBinary(int valueToConvert) {
+		StringBuilder binary = new StringBuilder("");
+		for (int i = 1; i <= 32; i++) {
+			binary.append(Integer.toString(valueToConvert%2));
+			valueToConvert = valueToConvert >> 1;
+			if (i%4 == 0) {
+				binary.append(' ');
+			}
+		}
+		
+		return binary.reverse().toString();
 	}
 	
 	/**
