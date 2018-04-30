@@ -173,11 +173,11 @@ public class Controller implements Runnable{
 	 * to the correct location.
 	 */
 	void decode() {
-		System.out.println("DECODE");
+		System.out.print("DECODE: ");
 		Scanner sc = new Scanner(currentIns);
+		System.out.println(currentIns);
 		opCode = sc.next();
 		opCode = opCode.toUpperCase();
-		System.out.println(opCode);
 		des = sc.next();
 		des.replace(",", "");
 		if (sc.hasNext()) {
@@ -185,7 +185,6 @@ public class Controller implements Runnable{
 			op1.replace(",", "");
 			op2 = sc.next();
 			op2.replace(",", "");
-			System.out.println(op2);
 		}
 		if (sc.hasNext()) {
 			shamft = Integer.parseInt(sc.next());
@@ -326,7 +325,6 @@ public class Controller implements Runnable{
 	 * @param editorPane - The text box
  	 */
 	public void passText(JEditorPane editorPane) {
-		System.out.println("Passing text");
 		this.rawInput = editorPane;		
 	}
 	
