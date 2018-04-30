@@ -28,4 +28,11 @@ public class ALU {
 	public static int srl(int op1, int op2) {
 		return op1 / (op2 *2);
 	}
+	public static boolean beq(int op1, int op2) {
+		if(op1 == op2) {
+			return true;
+		} else {
+			return false;
+		}
+	}
 }
