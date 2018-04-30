@@ -78,4 +78,4 @@ To run from command line
 3. Use `java sincySimulator.Main [FILENAME]`
 ```
 
-![alt text](images/javaRun.jpg)
+![Example of running on java](/media/javaRun.jpg)
