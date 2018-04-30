@@ -36,6 +36,7 @@ public class MainMemory {
 	{
 		
 		mem[address]= data;
+		this.dm.updateTable(mem);
 		
 	}
 	
