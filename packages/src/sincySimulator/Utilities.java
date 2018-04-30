@@ -30,7 +30,7 @@ public class Utilities {
 		
 		Scanner s = new Scanner(instruction);
 		
-		switch(s.next()) {
+		switch(s.next().toUpperCase()) {
 			case("ADD"):
 				op = "000000";
 				rd = findRegisterCode(s.next());
@@ -273,7 +273,7 @@ public class Utilities {
 	 * @return - register index number
 	 */
 	static public int registerCodeToInt(String reg) {
-		reg.toLowerCase();
+		reg = reg.replace(",","").toLowerCase();
 		switch(reg) {
 			case "$zero":
 				return 0;

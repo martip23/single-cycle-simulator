@@ -150,7 +150,6 @@ public class DataMemory extends JFrame {
 		table.setModel(new DefaultTableModel(newTable, new String[] {
 				"Address", "Value"
 			}));
-		System.out.println("Updated Model");
 	}
 
 }
