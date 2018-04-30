@@ -18,8 +18,232 @@ public class Utilities {
 	 * @return instruction in binary format
 	 */
 	static public String instructionToBinary(String instruction) {
-		//@TODO: implementation
-		return "-1";
+		String op = "";
+		String rs = "";
+		String rt = "";
+		String rd = "";
+		String shamt = "";
+		String funct = "";
+		String imm = "";
+		
+		Scanner s = new Scanner(instruction);
+		
+		switch(s.next()) {
+			case("ADD"):
+				op = "000000";
+				rd = findRegisterCode(s.next());
+				rs = findRegisterCode(s.next());
+				rt = findRegisterCode(s.next());
+				shamt = "00000";
+				funct = "100000";
+				break;
+				
+			case("ADDI"):
+				op = "001000";
+				rs = findRegisterCode(s.next());
+				rt = findRegisterCode(s.next());
+				imm = new Integer(0).toBinaryString(s.nextInt());
+				while(imm.length()<16){
+					imm = "0"+ imm;
+				}
+				break;
+				
+			case("SUB"):
+				op = "000000";
+				rd = findRegisterCode(s.next());
+				rs = findRegisterCode(s.next());
+				rt = findRegisterCode(s.next());
+				shamt = "00000";
+				funct = "100010";
+				break;
+				
+			case("LW"):
+				op = "010011";
+				rs = findRegisterCode(s.next());
+				imm = new Integer(0).toBinaryString(s.nextInt());
+				while(imm.length()<16){
+					imm = "0"+ imm;
+				}
+				rt = findRegisterCode(s.next());
+				break;
+				
+			case("SW"):
+				op = "101011";
+				rs = findRegisterCode(s.next());
+				imm = new Integer(0).toBinaryString(s.nextInt());
+				while(imm.length()<16){
+					imm = "0"+ imm;
+				}
+				rt = findRegisterCode(s.next());
+				break;
+				
+			case("J"):
+				op = "000010";
+				imm = new Integer(0).toBinaryString(s.nextInt());
+				while(imm.length()<26){
+					imm = "0"+ imm;
+				}
+				break;
+				
+			case("BEQ"):
+				op = "000100";
+				rs = findRegisterCode(s.next());
+				rt = findRegisterCode(s.next());
+				imm = new Integer(0).toBinaryString(s.nextInt());
+				while(imm.length()<16){
+					imm = "0"+ imm;
+				}
+				break;
+				
+			case("AND"):
+				funct = "100100";
+				rd = findRegisterCode(s.next());
+				rs = findRegisterCode(s.next());
+				rt = findRegisterCode(s.next());
+				break;
+				
+			case("OR"):
+				funct = "100101";
+				rd = findRegisterCode(s.next());
+				rs = findRegisterCode(s.next());
+				rt = findRegisterCode(s.next());
+				break;
+				
+			case("MUL"):
+				op = "011100";
+				funct = "000010";
+				rd = findRegisterCode(s.next());
+				rs = findRegisterCode(s.next());
+				rt = findRegisterCode(s.next());
+				break;
+				
+			case("SLL"):
+				op = "000000";
+				rd = findRegisterCode(s.next());
+				rs = findRegisterCode(s.next());
+				rt = "00000";
+				shamt = new Integer(0).toBinaryString(s.nextInt());
+				while(shamt.length()<5){
+					shamt = "0"+ shamt;
+				}
+				funct = "000000";
+				break;
+			
+			case("SRL"):
+				op = "000000";
+				funct = "000010";
+				rd = findRegisterCode(s.next());
+				rs = findRegisterCode(s.next());
+				rt = "00000";
+				shamt = new Integer(0).toBinaryString(s.nextInt());
+				while(shamt.length()<5){
+					shamt = "0"+ shamt;
+				}
+				break;
+		}
+		return op+rs+rt+rd+shamt+funct+imm;
+	}
+	
+	static public String findRegisterCode(String operation) {
+		switch(operation) {
+		case("$zero"):
+			operation = "00000";
+			break;
+		case("$at"):
+			operation = "00001";
+			break;
+		case("$v0"):
+			operation = "00010";
+			break;
+		case("$v1"):
+			operation = "00011";
+			break;
+		case("$a0"):
+			operation = "00100";
+			break;
+		case("$a1"):
+			operation = "00101";
+			break;
+		case("$a2"):
+			operation = "00110";
+			break;
+		case("$a3"):
+			operation = "00111";
+			break;
+		case("$t0"):
+			operation = "01000";
+			break;
+		case("$t1"):
+			operation = "01001";
+			break;
+		case("$t2"):
+			operation = "01010";
+			break;
+		case("$t3"):
+			operation = "01011";
+			break;
+		case("$t4"):
+			operation = "01100";
+			break;
+		case("$t5"):
+			operation = "01101";
+			break;
+		case("$t6"):
+			operation = "01110";
+			break;
+		case("$t7"):
+			operation = "01111";
+			break;
+		case("$s0"):
+			operation = "10000";
+			break;		
+		case("$s1"):
+			operation = "10001";
+			break;
+		case("$s2"):
+			operation = "10010";
+			break;
+		case("$s3"):
+			operation = "10011";
+			break;
+		case("$s4"):
+			operation = "10100";
+			break;
+		case("$s5"):
+			operation = "10101";
+			break;
+		case("$s6"):
+			operation = "10110";
+			break;
+		case("$s7"):
+			operation = "10111";
+			break;
+		case("$t8"):
+			operation = "11000";
+			break;
+		case("$t9"):
+			operation = "11001";
+			break;
+		case("$k0"):
+			operation = "11010";
+			break;
+		case("$k1"):
+			operation = "11011";
+			break;
+		case("$gp"):
+			operation = "11100";
+			break;
+		case("$sp"):
+			operation = "11101";
+			break;
+		case("$fp"):
+			operation = "11110";
+			break;
+		case("$ra"):
+			operation = "11111";
+			break;
+		}
+		return operation;
 	}
 	
 	/**
