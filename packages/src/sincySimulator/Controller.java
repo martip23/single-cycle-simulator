@@ -64,6 +64,7 @@ public class Controller implements Runnable{
 	int shamft;
 	int funct;
 	
+	int memVal;
 	int result;
 	boolean willWrite = false;
 	
@@ -258,9 +259,7 @@ public class Controller implements Runnable{
 		System.out.println("MEMORY");
 		if (opCode.equals("LW")) {
 			System.out.println("Load called");
-			System.out.println("Result: " + result);
-			int memoryVal = mainMem.load(result);
-			reg.write(Utilities.registerCodeToInt(des), memoryVal);
+			memVal = mainMem.load(result);
 		}
 		if (opCode.equals("SW")) {
 			System.out.println("Store called");
@@ -272,6 +271,9 @@ public class Controller implements Runnable{
 		System.out.println("WRITEBACK");
 		if (willWrite) {
 			reg.write(Utilities.registerCodeToInt(des), result);
+			if (opCode.equals("LW")) {
+				reg.write(Utilities.registerCodeToInt(des), memVal);
+			}
 		}
 		PC++;
 		if (PC == instructionTotal) {
