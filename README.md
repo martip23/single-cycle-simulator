@@ -68,4 +68,14 @@ The client will provide an assembly .dat file or type instructions on a pop-up w
 | NOP              	| 000000 	| 000000    	| R    	|
 
 
+# How to build#
+Use an IDE like eclipse to build.
+You will need to import the source code found in src/
+To run from command line
+```
+1. Build with an IDE.
+2. Navigate to packages/bin/
+3. Use `java sincySimulator.Main [FILENAME]`
+```
 
+![alt text](images/javaRun.jpg)
