@@ -86,6 +86,10 @@ public class ControlPanel extends JFrame implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		controller.operation(e.getActionCommand());
 	}
+	
+	public float getDelay() {
+		return Float.parseFloat(textField.getText());
+	}
 }
 
 

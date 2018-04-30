@@ -34,7 +34,7 @@ public class InstructionMemory {
 	 */
 	public void store(int k, String data) {
 		instructions[k] = data;
-		binaryInstructions[k] = Utilities.instructionToBinary(data);
+		binaryInstructions[k] = Utilities.instructionToBinary(data.replace(",", ""));
 		imw.updateTable(instructions, binaryInstructions);
 	}
 	

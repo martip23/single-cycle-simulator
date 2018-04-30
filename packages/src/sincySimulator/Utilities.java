@@ -273,7 +273,7 @@ public class Utilities {
 	 * @return - register index number
 	 */
 	static public int registerCodeToInt(String reg) {
-		reg.toLowerCase();
+		reg = reg.replace(",","").toLowerCase();
 		switch(reg) {
 			case "$zero":
 				return 0;
