@@ -239,12 +239,12 @@ public class Controller implements Runnable{
 			result = ALU.srl(val1, val2);
 			willWrite = true;
 		} else if (opCode.equals("LW")) {
-			int val1 = op1;
+			int val1 = Integer.parseInt(op1);
 			int val2 = reg.load(Utilities.registerCodeToInt(op2));
 			result = ALU.add(val1, val2);
 			willWrite = true;
 		} else if (opCode.equals("SW")) {
-			int val1 = op1;
+			int val1 = Integer.parseInt(op1);
 			int val2 = reg.load(Utilities.registerCodeToInt(op2));
 			result = ALU.add(val1, val2);
 			willWrite = false;
@@ -256,20 +256,22 @@ public class Controller implements Runnable{
 	 */
 	void memory () {
 		System.out.println("MEMORY");
-		if (opCode == "LW") {
+		if (opCode.equals("LW")) {
 			System.out.println("Load called");
-			mainMem.mem[result] = reg.registers[Utilities.registerCodeToInt(des)]
+			System.out.println("Result: " + result);
+			int memoryVal = mainMem.load(result);
+			reg.write(Utilities.registerCodeToInt(des), memoryVal);
 		}
-		if (opCode == "SW") {
+		if (opCode.equals("SW")) {
 			System.out.println("Store called");
-			result = mainMem.mem[result];
+			mainMem.store(reg.load(Utilities.registerCodeToInt(des)), result);
 		}
 	}
 	
 	void writeBack() {
 		System.out.println("WRITEBACK");
 		if (willWrite) {
-			reg.write(Utilities.registerCodeToInt(des);
+			reg.write(Utilities.registerCodeToInt(des), result);
 		}
 		PC++;
 		if (PC == instructionTotal) {

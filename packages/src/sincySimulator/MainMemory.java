@@ -33,24 +33,21 @@ public class MainMemory {
 	 *  	 
 	 */
 	public void store(int data, int address)
-	{
-		
+	{	
 		mem[address]= data;
-		
+		dm.updateTable(mem);
 	}
 	
 	/** enter above function or class 
 	 * Loads the instruction from memory Location
-	 * @param data - Memory location to load
+	 * @param index - Memory location to load
 	 * @return Returns the address at this location.
 	 */
 	public int load(int index)
 	{
-		
-		return mem[index];
-		
-
+		int loadVal = mem[index];
+		return (loadVal);
 	}
 
 
-	}
+}
