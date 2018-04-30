@@ -30,7 +30,7 @@ public class Utilities {
 		
 		Scanner s = new Scanner(instruction);
 		
-		switch(s.next()) {
+		switch(s.next().toUpperCase()) {
 			case("ADD"):
 				op = "000000";
 				rd = findRegisterCode(s.next());

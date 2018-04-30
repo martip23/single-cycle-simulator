@@ -173,6 +173,7 @@ public class Controller implements Runnable{
 		Scanner sc = new Scanner(currentIns);
 		System.out.println(currentIns);
 		opCode = sc.next();
+		opCode = opCode.toUpperCase();
 		System.out.println(opCode);
 		des = sc.next();
 		if (sc.hasNext()) {
@@ -192,7 +193,6 @@ public class Controller implements Runnable{
 	 */
 	void execute() {
 		System.out.println("EXECUTE");
-		opCode.toUpperCase();
 		
 		if (opCode.equals("ADD")) {
 			int val1 = reg.load(Utilities.registerCodeToInt(op1));
