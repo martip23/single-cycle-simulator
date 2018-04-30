@@ -249,12 +249,16 @@ public class Controller implements Runnable{
 			int val2 = reg.load(Utilities.registerCodeToInt(op2));
 			result = ALU.add(val1, val2);
 			willWrite = false;
-		}else if (opCode.equals("BEQ")) {
+		} else if (opCode.equals("BEQ")) {
 			int val1 = reg.load(Utilities.registerCodeToInt(des));
 			int val2 = reg.load(Utilities.registerCodeToInt(op1));
 			if(ALU.beq(val1, val2)) {
 				PC += Integer.parseInt(op2)-1;
 			}
+			willWrite = false;
+		} else if (opCode.equals("J")) {
+			PC = Integer.parseInt(des)-1;
+System.out.println(PC);
 			willWrite = false;
 		}
 	}
