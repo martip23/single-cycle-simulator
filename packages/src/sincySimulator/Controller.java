@@ -248,7 +248,7 @@ public class Controller implements Runnable{
 			int val2 = reg.load(Utilities.registerCodeToInt(op2));
 			result = ALU.add(val1, val2);
 			willWrite = false;
-		}
+ 		}
 	}
 	
 	/**
@@ -256,12 +256,14 @@ public class Controller implements Runnable{
 	 */
 	void memory () {
 		System.out.println("MEMORY");
-		if (opCode == "LW")
+		if (opCode == "LW") {
 			System.out.println("Load called");
-			result = mainMem.mem[result];
-		if (opCode == "SW")
-			System.out.println("Store called");
 			mainMem.mem[result] = reg.registers[Utilities.registerCodeToInt(des)]
+		}
+		if (opCode == "SW") {
+			System.out.println("Store called");
+			result = mainMem.mem[result];
+		}
 	}
 	
 	void writeBack() {
