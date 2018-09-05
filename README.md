@@ -1,24 +1,14 @@
 # Sincy - Single Cycle Simulator
-A single cycle simulator w/ GUI built in java to demonstrate how a single cycle processor would work.
+The purpose of this program is to assist students in learning how a single cycle MIPS processor works. It is mean to supplement and enhance understanding of the MIPS single Cycle Processor.
 
 # Team Members & Roles #
 
 | Name   	  | Title                             |
 |-------------|-----------------------------------|
-| **Patrick** | GUI Developer and Chief Architect |
-| **Troy**    | Lead Developer                    |
-| **Mary**    | Team Manager and Developer        |
+| **Patrick** | GUI Developer, Chief Architect and documentation specialist |
+| **Troy**    | Lead Developer                   							|
+| **Mary**    | Team Manager and Developer        							|
 
-
-## **Problem:** ##
- 
-As a programmer it is important to know how a cycle simulator works, but it is hard to to understand the single cycle processor.
-
-The process behind the single simulator is important to understand in computer architecture.
-In order to understand something as a programmer you want to understand the process but also relate to the computer architecture.
-Therefore the students decided to create a single cycle simulator with a GUI in java which would 
-demonstrate the single cycle program. Understanding a single cycle simulator will give a better understanding 
-of the more complicated simulators.
 
 ## **Expectation** ##
 We expect to deliver a single cycle processor simulator that can accept a few assembly instructions and show where the information would begin and end in a single cycle processor.
@@ -43,10 +33,10 @@ We expect to deliver a single cycle processor simulator that can accept a few as
 4. Perform integration tests.
 
 ## Deliverables ##
-We will prepare a read me, access to the program code, an accompanying PowerPoint presentation and documentation to support this program. A live demo will be presented in class at which time questions may be answered.
+We will prepare a read me, access to the program code, an accompanying PowerPoint presentation and documentation to support this program. A live demo will be presented in class at which time questions may be answered. Documentation of Sincy classes and methods are available **[HERE.](https://patrickmartinez.us/sincyDocs/ "sincy documentation")**
 
 ## Client Expectations ##
-The client will provide an assembly .dat file or type instructions on a pop-up window. The program will then begin execution as customer hits start execution. The execution will be delayed by the time delay set. The client may choose to iterate through the program step by step by using the step command.
+The client will provide an assembly .asm file or type instructions on a pop-up window. The program will then begin execution as customer hits start execution. The execution will be delayed by the time delay set. The client may choose to iterate through the program step by step by using the step command.
 
 ## Instruction Set Architecture ##
 ### Instructions Supported ###
@@ -67,8 +57,13 @@ The client will provide an assembly .dat file or type instructions on a pop-up w
 | SRL              	| 000000 	| 000010    	| R    	|
 | NOP              	| 000000 	| 000000    	| R    	|
 
+# Running Sincy #
+You may download the .jar and run on any system 
 
-# How to build#
+
+# How to build Sincy#
+For help downloading to build please see [this guide.](https://github.com/martip23/single-cycle-simulator/blob/master/usingGithub.md "Github Guide")
+
 Use an IDE like eclipse to build.
 You will need to import the source code found in src/
 To run from command line
