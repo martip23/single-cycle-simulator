@@ -7,7 +7,7 @@ The purpose of this program is to assist students in learning how a single cycle
 
 | Name   	  | Title                             |
 |-------------|-----------------------------------|
-| **Patrick** | GUI Developer, Chief Architect and documentation specialist |
+| **Patrick** | GUI Developer, Chief Architect and Documentation Specialist |
 | **Troy**    | Lead Developer                   							|
 | **Mary**    | Team Manager and Developer        							|
 
