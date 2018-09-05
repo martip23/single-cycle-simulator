@@ -1,6 +1,8 @@
 # Sincy - Single Cycle Simulator
 The purpose of this program is to assist students in learning how a single cycle MIPS processor works. It is meant to supplement and enhance understanding of the MIPS single Cycle Processor.
 
+#### Please see [HERE](https://s3.us-east-2.amazonaws.com/patrickmartinez.us/Sincy+Technical+Manual.pdf "Sincy Technical Manual") to set up and run Sincy.####
+
 # Team Members & Roles #
 
 | Name   	  | Title                             |
