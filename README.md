@@ -1,7 +1,7 @@
 # Sincy - Single Cycle Simulator
 The purpose of this program is to assist students in learning how a single cycle MIPS processor works. It is meant to supplement and enhance understanding of the MIPS single Cycle Processor.
 
-#### Please see [HERE](https://s3.us-east-2.amazonaws.com/patrickmartinez.us/Sincy+Technical+Manual.pdf "Sincy Technical Manual") to set up and run Sincy.####
+#### Please see [HERE](https://s3.us-east-2.amazonaws.com/patrickmartinez.us/Sincy+Technical+Manual.pdf "Sincy Technical Manual") to set up and run Sincy. ####
 
 # Team Members & Roles #
 
@@ -63,7 +63,7 @@ The client will provide an assembly .asm file or type instructions on a pop-up w
 You may download the .jar and run on any system 
 
 
-# How to build Sincy#
+# How to build Sincy #
 For help downloading to build please see [this guide.](https://github.com/martip23/single-cycle-simulator/blob/master/usingGithub.md "Github Guide")
 
 Use an IDE like eclipse to build.
