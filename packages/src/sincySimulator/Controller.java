@@ -17,14 +17,16 @@ import sincySimulator.viewComponents.InstructionWindow;
 import sincySimulator.viewComponents.RegistersTable;
 
 /**
- * @author martip23
  * This class is the controller (control unit) of the single cycle processor. 
  * It is the first thing to boot up. It starts by pulling a text field into 
- * instruction memory. It then initializes the program counter to 0. 
+ * instruction memory. The instruction memory may be passed as a filename 
+ * by passing an argument or typed directly when no arguments are provided.
+ * It then initializes the program counter to 0. 
  * It then reads the first instruction and executes it using a 5 step
  * program. The 5 steps are fetch, decode, execute, memory access and write-back. The control unit
  * passes most of these tasks to other units and only takes care of decoding 
  * directly.
+ * @author martip23
  */
 public class Controller implements Runnable{
 	
@@ -70,6 +72,9 @@ public class Controller implements Runnable{
 	
 	ALU alu; 				// Initializing the ALU
 	
+	/**
+	 * The controller constructor initializes the view.
+	 */
 	Controller() {	
 		imw = new InstructionMemoryWindow();
 		insMemory = new InstructionMemory(imw);
@@ -91,11 +96,16 @@ public class Controller implements Runnable{
 	
 	/**
 	 * Reads a file and loads all instructions into instruction memory.
+	 * If there is no file name passed as an argument it will then open
+	 * an instruction window so ASM can be entered manually.
 	 * @param filename the name of the file
-	 * @return 
+	 * @return Passes the instructions to the instruction menu. If there
+	 * is no filename (not ran from command line) then this function will
+	 * instead open an instruction window.
 	 */
 	void loadCode(String filename) {
 		@SuppressWarnings("unused")
+		
 		ArrayList<String> inputData;
 		this.filename = filename;		
 		if (filename == null) {
@@ -134,7 +144,8 @@ public class Controller implements Runnable{
 	}
 	
 	/**
-	 * Starts the processor.
+	 * Starts the processor. It calls fetch, decode, execute
+	 * memory and write-back in that order.
 	 */
 	public void run() {
 		while(true) {
@@ -161,7 +172,9 @@ public class Controller implements Runnable{
 	
 	/**
 	 * Gets the next instruction from instruction memory and 
-	 * loads into currentIns.
+	 * loads into currentIns. Which will be displayed on the
+	 * instruction memory. It also highlights the row 
+	 * corresponding to the current instruction running.
 	 */
 	void fetch() {
 		System.out.println("FETCH");
@@ -258,7 +271,7 @@ public class Controller implements Runnable{
 			willWrite = false;
 		} else if (opCode.equals("J")) {
 			PC = Integer.parseInt(des)-1;
-System.out.println(PC);
+			System.out.println(PC);
 			willWrite = false;
 		}
 	}
@@ -278,6 +291,9 @@ System.out.println(PC);
 		}
 	}
 	
+	/**
+	 * Write the information to memory.
+	 */
 	void writeBack() {
 		System.out.println("WRITEBACK");
 		if (willWrite) {
@@ -305,7 +321,7 @@ System.out.println(PC);
 	}
 	
 	/**
-	 * Operations on Button Presses
+	 * Operations on Button Presses. Calls correction method for button.
 	 * @param option - Button that was clicked
 	 */
 	public synchronized void operation(String option) {

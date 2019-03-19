@@ -31,6 +31,7 @@ public class InstructionMemory {
 	 * Stores an instruction string in memory
 	 * @param i - Index to store at
 	 * @param data - Instruction string to store.
+	 * @return Instruction at index i will be data
 	 */
 	public void store(int k, String data) {
 		instructions[k] = data;

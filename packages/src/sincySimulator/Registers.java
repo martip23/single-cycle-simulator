@@ -29,6 +29,7 @@ public class Registers {
 	 * Writes to registers
 	 * @param i = register binary address
 	 * @param data = data to write
+	 * @return Register i will have value of data parameter.
 	 */
 	public void write(int i, int data) {
 		registers[i] = data;
@@ -38,7 +39,7 @@ public class Registers {
 	/**
 	 * Reads the data at this register
 	 * @param i = register to read
-	 * @returns data at this register
+	 * @returns data at register i
 	 */
 	public int load(int i) {
 		return registers[i];

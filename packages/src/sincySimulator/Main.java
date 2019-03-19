@@ -1,13 +1,13 @@
 package sincySimulator;
 
 /**
- * Starting point for the MIPS processor.
+ * Starting point for the MIPS processor. Initializes Controller class.
  * @author martip23
  */
 public class Main {
 
 	/**
-	 * Can read a file to put instructions in Instruction Memory
+	 * Can read a file to pass instructions to Instruction Memory
 	 * @param args - Filename
 	 */
 	public static void main(String[] args) throws Exception {

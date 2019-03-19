@@ -26,11 +26,11 @@ public class MainMemory {
 		dm.updateTable(mem);
 	}
 
-	/** enter above function or class 
-	 * Stores an instruction string into memory trough an Array
-	 *  @param data - Data to store
-	 *  @param address - represents address of i 
-	 *  	 
+	/**
+	 * Stores an integer value in the table.
+	 * @param data - Data to store
+	 * @param address - represents address of i 
+	 * @return Information at address will be value of data
 	 */
 	public void store(int data, int address)
 	{	
@@ -38,7 +38,7 @@ public class MainMemory {
 		dm.updateTable(mem);
 	}
 	
-	/** enter above function or class 
+	/**
 	 * Loads the instruction from memory Location
 	 * @param index - Memory location to load
 	 * @return Returns the address at this location.
